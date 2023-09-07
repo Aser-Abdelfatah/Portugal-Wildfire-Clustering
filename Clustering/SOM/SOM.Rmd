@@ -1,0 +1,128 @@
+---
+title: "SOM"
+output:
+  pdf_document: default
+  html_document: default
+date: "2023-07-30"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(paletteer)
+library(kohonen)
+library(ggplot2)
+library(datawizard)
+library(XML)
+library(RCurl)
+```
+
+
+```{r}
+# The data is the climatic_and_meteorological_data_after_imputation.csv file located at 
+# https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Portugal_Dataset_Extraction/Datasets/Burned_Data
+url <- getURL("https://raw.githubusercontent.com/Aser-Abdelfatah/Portugal-Wildfire-Research/main/Portugal_Dataset_Extraction/Datasets/Burned_Data/climatic_and_meteorological_data_after_imputation.csv")
+data = read.csv(text = url)
+data <- data[-1] # remove index column
+drop <- c( 'day_of_the_year', 'month', 'time', 'x_int', 'y_int', 'burned_areas') # remove irrelevant columns
+data = data[,!(names(data) %in% drop)]
+head(data, 5)
+```
+```{r}
+# normalizes data
+data <- normalize(data)
+```
+
+
+```{r}
+som_grid <- somgrid(xdim = 30, ydim=50, topo="hexagonal")
+# The dataframe has to be transformed to matrix
+data00<-as.matrix(data)
+set.seed(73) # Set the seed of R‘s random number generator, which is useful for
+#creating simulations or random objects that can be reproduced.
+SOM_00 <- som(data00, grid=som_grid, rlen=200)
+summary(SOM_00) 
+```
+```{r}
+plot(SOM_00, type="changes")
+
+```
+
+
+```{r}
+coolBlueHotRed <- function(n, alpha = 1) {rainbow(n, end=4/6, alpha=alpha)[n:1]}
+```
+
+
+```{r}
+plot(SOM_00, type="count", main="Node Counts", palette.name=coolBlueHotRed)
+
+```
+
+```{r}
+plot(SOM_00, type="dist.neighbours", main = "SOM neighbour distances")
+```
+
+```{r}
+for (i in 1:46){
+plot(SOM_00, type = "property", property = getCodes(SOM_00)[,i],
+main=colnames(getCodes(SOM_00))[i], palette.name=coolBlueHotRed)}
+```
+```{r}
+som_grid_small <- somgrid(xdim = 20, ydim=40, topo="hexagonal")
+SOM_01 <- som(data00, grid=som_grid_small, rlen=200)
+summary(SOM_01)
+
+```
+
+```{r}
+plot(SOM_01, type="changes")
+
+```
+
+```{r}
+plot(SOM_01, type="count", main="Node Counts", palette.name=coolBlueHotRed)
+```
+
+
+```{r}
+plot(SOM_01, type="dist.neighbours", main = "SOM neighbour distances")
+```
+
+
+```{r}
+for (i in 1:46){
+plot(SOM_01, type = "property", property = getCodes(SOM_01)[,i],
+main=colnames(getCodes(SOM_01))[i], palette.name=coolBlueHotRed)}
+```
+
+
+
+
+```{r}
+mydata<-getCodes(SOM_00) # Extract codebook vectors from each unit in the SOM-grid
+head (mydata)
+```
+
+```{r}
+clsEU00 <- cutree(hclust(dist(getCodes(SOM_00))), 4)
+```
+
+
+```{r}
+# Display the SOM-grid with different colors for each cluster:
+# Colour palette definition
+pretty_palette <- c("green", 'blue', 'orange', 'red',
+
+'yellow', 'grey', 'brown')
+
+plot(SOM_00, bgcol = pretty_palette[clsEU00], main = "Clusters")
+add.cluster.boundaries(SOM_00, clsEU00)
+```
+
+
+
+
+

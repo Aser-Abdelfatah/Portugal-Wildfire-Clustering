@@ -1,4 +1,4 @@
-To re-produce the SOM file, the data located in https://raw.githubusercontent.com/Aser-Abdelfatah/Portugal-Wildfire-Research/main/Portugal_Dataset_Extraction/Datasets/Burned_Data/climatic_and_meteorological_data_after_imputation.csv need to be pre-processed to remove irrelevant columns.
+To re-produce the SOM file, simply run the R code in the rmd file in this directory. If you are following the knitted pdf, the data located in https://raw.githubusercontent.com/Aser-Abdelfatah/Portugal-Wildfire-Research/main/Portugal_Dataset_Extraction/Datasets/Burned_Data/climatic_and_meteorological_data_after_imputation.csv need to be pre-processed first to remove irrelevant columns.
 </br> This can be done in either R or Python.</br>  In R, 
 ```{r}
 library(XML)
