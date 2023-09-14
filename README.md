@@ -5,7 +5,7 @@ This is the open-source repo for my wildfire clustering research done at Univers
 The data is located in [Portugal_Dataset_Extraction/Datasets](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Portugal_Dataset_Extraction/Datasets) in tabular form and stored in CSV format. There are six datasets, three for undersampled unburned areas in Portugal and three for all burned areas in Portugal from April 2006 to September 2022. For either burned or non-burned data, one dataset includes meteorological data, one dataset include both meteorological and climatic data, and a third dataset includes meteorological and climatic data in addition to imputated data for missing values. The climatic data is computed as the average of the meteorological data over the entire time frame of the source datacube.
 </br> The source datacube is the Mesogeos dataset, and the source code for it is located in [Mesogeos GitHub repository.](https://github.com/Orion-AI-Lab/mesogeos/tree/main) </br> 
   
-  Datacube Variables <sup>1</sup>
+ <details>  <summary>Datacube Variables <sup>1</sup></summary>
 
 The original datacube contains the following variables:
 
@@ -50,6 +50,7 @@ Vriables in the cube:
 | tp | m | day's total precipitation |
 | wind_speed | m/s | day's maximum wind speed |
 
+</details>
 
 
 </br> The code used to extract the burned dataset is located in [Portugal_Dataset_Extraction/Extraction_of_Burned_Data](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Portugal_Dataset_Extraction/Extraction_of_Burned_Data), and the code used to extract the non-burned dataset is located in [Portugal_Dataset_Extraction/Extraction_of_Non-burned_Data](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Portugal_Dataset_Extraction/Extraction_of_Non-burned_Data). </br> </br> There are two clustering algorithms used. First is K-means, and the code used along with the visualizations is stored in a Juypter notebook located in [Clustering/K-Means](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Clustering/K-Means). The Legacy folder located in [Clustering/K-Means](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Clustering/K-Means) has old code that is left for reference only. The second clustering algorithm is self-organizing map (SOM). The code is in R and is located in [Clustering/SOM](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Clustering/SOM). There is a knitted pdf file and an R source code. More information on re-producing the SOM is located in the README located inside [Clustering/SOM](https://github.com/Aser-Abdelfatah/Portugal-Wildfire-Research/tree/main/Clustering/SOM).
