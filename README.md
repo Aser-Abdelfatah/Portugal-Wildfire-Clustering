@@ -1,4 +1,4 @@
-# Portugal-Wildfire-Clustering
+# Portugal-Wildfire-Analysis
 This is the open-source repo for my wildfire research done at University of Lausanne during summer 2023 as a part of Beucler Lab and in collaboration with Dr. Marj Tonini
 
 ## Work reproducibility:
